@@ -67,17 +67,9 @@ Update the connection string in `appsettings.json`:
 
 ### 3. Configure Stripe Settings
 Add your Stripe API keys to `appsettings.json`:
-{ "Stripe": { "SecretKey": "your_stripe_secret_key", "PublishableKey": "your_stripe_publishable_key" } }
 
 ### 4. Configure Facebook Authentication
 Update Facebook OAuth settings in `Program.cs` or use User Secrets:
-dotnet user-secrets set "Facebook:AppId" "your_facebook_app_id" dotnet user-secrets set "Facebook:AppSecret" "your_facebook_app_secret"
-
-### 5. Apply Database Migrations
-dotnet ef database update
-
-### 6. Run the Application
-The application will be available at `https://localhost:7xxx` (port may vary).
 
 ## 🏗️ Architecture
 
