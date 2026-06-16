@@ -1,4 +1,4 @@
-﻿@model ShoppingCart 
+﻿@model ShoppingCart
 <form method="post">
     <input hidden asp-for="ProductId" />
     <div class="card shadow border-0 mt-4">
@@ -21,7 +21,54 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
-                        <img src="@Model.Product.ImageUrl" width="100%" class="rounded" />
+
+
+                        @if (Model.Product.ProductImages != null && Model.Product.ProductImages.Count() > 0)
+                        {
+                            var reorderedImages = Model.Product.ProductImages
+                            .Skip(1).Take(1) // Берем второй элемент
+                            .Concat(Model.Product.ProductImages.Take(1)) // Добавляем первый элемент
+                            .Concat(Model.Product.ProductImages.Skip(2)) // Добавляем остальные
+                            .ToList();
+                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators">
+
+                                    @foreach (var imageWithIndex in reorderedImages
+                                   .Select((image, index) => new { ProductImage = image, Index = index }))
+                                    {
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                data-bs-slide-to="@imageWithIndex.Index" class="@(imageWithIndex.Index==0?"active":"")" aria-current="true" aria-label="Slide 1"></button>
+                                    }
+                                </div>
+                                <div class="carousel-inner">
+                                    @foreach (var imageWithIndex in reorderedImages
+                                   .Select((image, index) => new { Image = image, Index = index }))
+                                    {
+                                        <div class="@(imageWithIndex.Index==0?"carousel-item active":"carousel-item")">
+                                            <img src="@imageWithIndex.Image.ImageUrl" class="d-block w-100" alt="...">
+                                        </div>
+                                    }
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        }
+
+
+
+
+
+
+
+
+
+
                     </div>
                     <div class="col-12 col-lg-6 offset-lg-1">
 
@@ -85,7 +132,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12 col-md-6 pb-1">
-                                <button type="submit" 
+                                <button type="submit"
                                         class="btn btn-primary bg-gradient  w-100 py-2 text-uppercase fw-semibold">
                                     Add to Cart
                                 </button>

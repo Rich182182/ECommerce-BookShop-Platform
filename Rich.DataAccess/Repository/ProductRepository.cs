@@ -20,7 +20,20 @@ namespace Rich.DataAccess.Repository
 
         public void Update(Product obj)
         {
-            _db.Products.Update(obj);
+            var objFromDb = _db.Products.FirstOrDefault(u => u.Id == obj.Id);
+            if (objFromDb != null)
+            {
+                objFromDb.Title = obj.Title;
+                objFromDb.Description = obj.Description;
+                objFromDb.CategoryId = obj.CategoryId;
+                objFromDb.Price = obj.Price;
+                objFromDb.Price50 = obj.Price50;
+                objFromDb.ListPrice = obj.ListPrice;
+                objFromDb.ISBN = obj.ISBN;
+                objFromDb.Author = obj.Author;
+                objFromDb.Price100 = obj.Price100;
+                objFromDb.ProductImages = obj.ProductImages;
+            }
         }
     }
 }

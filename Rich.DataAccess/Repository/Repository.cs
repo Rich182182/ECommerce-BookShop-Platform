@@ -29,6 +29,20 @@ namespace Rich.DataAccess.Repository
         {
             dbSet.RemoveRange(entities);
         }
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
+        {
+            IQueryable<T> query = dbSet;
+
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
+
+            return query.FirstOrDefault(filter);
+        }
         //Category
         public IEnumerable<T> GetAll(string? includeProperties = null)
         {
