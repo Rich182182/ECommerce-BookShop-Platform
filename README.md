@@ -1,6 +1,6 @@
-# ASPRich - E-Commerce Web Application
+# E-Commerce Book Shop Web Application
 
-A full-featured e-commerce web application built with ASP.NET Core 8.0 Razor Pages, featuring user authentication, role-based authorization, shopping cart functionality, order management, and payment processing.
+A full-featured e-commerce web application built with ASP.NET Core 8.0 MVC, featuring user authentication, role-based authorization, shopping cart functionality, order management, and payment processing.
 
 ## 🚀 Features
 
@@ -74,7 +74,7 @@ Update Facebook OAuth settings in `Program.cs` or use User Secrets:
 ## 🏗️ Architecture
 
 The application follows a **layered architecture** with:
-- **Presentation Layer:** Razor Pages and MVC Views
+- **Presentation Layer:** MVC
 - **Business Logic Layer:** Controllers and Services
 - **Data Access Layer:** Repository Pattern with Unit of Work
 - **Domain Layer:** Model classes
